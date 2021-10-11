@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
           onSurface: Colors.black38,
           onBackground: Colors.black,
           onError: Colors.white,
-          brightness: Brightness.dark,
+          brightness: Brightness.light,
         ),
         canvasColor: Color.fromRGBO(255, 254, 229, 1),
         fontFamily: 'Raleway',
