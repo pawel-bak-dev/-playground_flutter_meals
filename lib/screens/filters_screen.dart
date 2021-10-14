@@ -4,6 +4,11 @@ import 'package:playground_flutter_meals/widgets/main_drawer.dart';
 class FiltersScreen extends StatefulWidget {
   static const routeName = '/filters';
 
+  final Map<String, bool> filters;
+  final Function saveFilters;
+
+  FiltersScreen(this.filters, this.saveFilters);
+
   @override
   State<FiltersScreen> createState() => _FiltersScreenState();
 }
@@ -13,6 +18,16 @@ class _FiltersScreenState extends State<FiltersScreen> {
   var _vegetarian = false;
   var _vegan = false;
   var _lactoseFree = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _glutenFree = widget.filters['gluten']!;
+    _vegetarian = widget.filters['vegetarian']!;
+    _vegan = widget.filters['vegan']!;
+    _lactoseFree = widget.filters['lactose']!;
+  }
 
   Widget _buildSwitchListTile(
     String title,
@@ -33,6 +48,17 @@ class _FiltersScreenState extends State<FiltersScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Filters'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.save),
+            onPressed: () => widget.saveFilters({
+              'gluten': _glutenFree,
+              'lactose': _lactoseFree,
+              'vegan': _vegan,
+              'vegetarian': _vegetarian,
+            }),
+          )
+        ],
       ),
       drawer: MainDrawer(),
       body: Column(
